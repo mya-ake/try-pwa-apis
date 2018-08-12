@@ -1,9 +1,11 @@
 import Vue from 'vue';
+import 'normalize.css';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import 'normalize.css';
+import registerSW from './register-sw';
 
 Vue.config.productionTip = false;
 
@@ -12,3 +14,5 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app');
+
+registerSW();
