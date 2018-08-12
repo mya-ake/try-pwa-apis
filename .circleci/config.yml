@@ -36,6 +36,19 @@ jobs:
           name: Unit test
           command: yarn test:unit
 
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run:
+          name: Build
+          command: yarn build
+
+
 workflows:
   version: 2
   execute_process:
