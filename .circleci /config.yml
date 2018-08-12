@@ -1,0 +1,46 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.8
+  environment:
+    TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run: 
+          name: Install modules
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run:
+          name: Unit test
+          command: yarn test:unit
+
+workflows:
+  version: 2
+  execute_process:
+    jobs:
+      - install
+      - tests:
+          requires:
+            - install
