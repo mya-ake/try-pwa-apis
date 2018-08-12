@@ -1,3 +1,7 @@
+const externalWebpackConfig = require('./webpack.config');
+
 module.exports = {
-  lintOnSave: undefined,
+  lintOnSave: true,
+  productionSourceMap: false,
+  configureWebpack: externalWebpackConfig,
 };
