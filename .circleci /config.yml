@@ -41,6 +41,6 @@ workflows:
   execute_process:
     jobs:
       - install
-      - tests:
+      - test:
           requires:
             - install
