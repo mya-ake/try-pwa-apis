@@ -5,6 +5,9 @@
 const workboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
+  resolve: {
+    extensions: ['.mjs'],
+  },
   plugins: [
     new workboxPlugin.GenerateSW({
       swDest: 'sw.js',

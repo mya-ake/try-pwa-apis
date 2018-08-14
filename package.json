@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "deploy": "node --experimental-modules bin/index deploy dist"
   },
   "dependencies": {
     "normalize.css": "^8.0.0",
@@ -21,9 +22,14 @@
     "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-prettier": "^3.0.0",
     "@vue/test-utils": "^1.0.0-beta.20",
+    "aws-sdk": "^2.291.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "commander": "^2.17.1",
     "vue-template-compiler": "^2.5.17",
     "workbox-webpack-plugin": "^3.4.1"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
