@@ -36,7 +36,19 @@ jobs:
           name: Unit test
           command: yarn test:unit
 
-  build:
+  build-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run:
+          name: Build test
+          command: yarn build
+
+  deploy:
     <<: *defaults
     steps:
       - checkout
@@ -47,7 +59,9 @@ jobs:
       - run:
           name: Build
           command: yarn build
-
+      - run:
+          name: Deploy
+          command: yarn deploy
 
 workflows:
   version: 2
@@ -57,3 +71,17 @@ workflows:
       - test:
           requires:
             - install
+      - build-test:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore:
+                - master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
