@@ -1,4 +1,4 @@
-import logger from '@/lib/logger';
+import logger from '@@/lib/logger';
 
 describe('lib/logger', () => {
   it('_buildLabel', () => {
