@@ -20,6 +20,10 @@ if (isProduction) {
 module.exports = {
   resolve: {
     extensions: ['.mjs'],
+    alias: {
+      '~~': __dirname,
+    },
   },
+
   plugins,
 };

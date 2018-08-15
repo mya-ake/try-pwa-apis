@@ -1,5 +1,5 @@
 import { usableServiceWorker } from './lib/check-api';
-import logger from './../lib/logger';
+import logger from '~~/lib/logger';
 
 export default () => {
   if (usableServiceWorker() === false) {
