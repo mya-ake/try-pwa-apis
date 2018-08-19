@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    serviceworker: true,
   },
   'extends': [
     'plugin:vue/recommended',
@@ -20,5 +21,8 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint'
-  }
+  },
+  globals: {
+    firebase: true,
+  },
 }

@@ -7,6 +7,7 @@ import store from './store';
 
 import registerSW from './register-sw';
 import webPush from './services/web-push';
+import logger from '~~/lib/logger';
 
 Vue.config.productionTip = false;
 
@@ -18,4 +19,10 @@ new Vue({
 
 registerSW();
 
-webPush.requestPermission();
+(async () => {
+  await webPush.requestPermission();
+  await webPush.getToken();
+  webPush.addMessageListener(payload => {
+    logger.name('push-listener').info(payload);
+  });
+})();
