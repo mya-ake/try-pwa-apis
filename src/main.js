@@ -6,6 +6,7 @@ import router from './router';
 import store from './store';
 
 import registerSW from './register-sw';
+import webPush from './services/web-push';
 
 Vue.config.productionTip = false;
 
@@ -16,3 +17,5 @@ new Vue({
 }).$mount('#app');
 
 registerSW();
+
+webPush.requestPermission();

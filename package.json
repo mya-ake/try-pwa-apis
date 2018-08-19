@@ -10,6 +10,7 @@
     "deploy": "node --experimental-modules bin/index deploy dist"
   },
   "dependencies": {
+    "firebase": "^5.4.0",
     "normalize.css": "^8.0.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
