@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <main class="main">
+      <router-view/>
+    </main>
+
+    <base-snackbar/>
   </div>
 </template>
 
@@ -11,5 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.main {
+  display: block;
 }
 </style>
