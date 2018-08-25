@@ -5,7 +5,6 @@ export class Snackbar {
   }
 
   set mdcSnackbar(snackbar) {
-    console.log(snackbar);
     this._mdcSnackbar = snackbar;
     this._resetStackMessage();
   }

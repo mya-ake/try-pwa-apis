@@ -2,10 +2,17 @@
   <div>
     <h1>Web Push</h1>
 
+    <p>
+      <span>プッシュ通知：</span>
+      <span v-if="hasToken">設定済み</span>
+      <span v-else>未設定</span>
+    </p>
     <base-button 
-      type="button" 
+      v-if="!hasToken"
+      v-cloak
+      type="button"
       @click="handleClickRequestPermission"
-    >プッシュ通知を許可する</base-button>
+    >プッシュ通知を設定する</base-button>
   </div>
 </template>
 
