@@ -5,11 +5,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import * as components from './components';
+import { importBaseComponents } from './lib/utils';
+
 import registerSW from './register-sw';
-import webPush from './services/web-push';
-import logger from '~~/lib/logger';
 
 Vue.config.productionTip = false;
+
+importBaseComponents(Vue, components);
 
 new Vue({
   router,
@@ -18,11 +21,3 @@ new Vue({
 }).$mount('#app');
 
 registerSW();
-
-(async () => {
-  await webPush.requestPermission();
-  await webPush.getToken();
-  webPush.addMessageListener(payload => {
-    logger.name('push-listener').info(payload);
-  });
-})();
