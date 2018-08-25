@@ -3,9 +3,13 @@ import { Snackbar } from './Snackbar';
 const snackbar = new Snackbar();
 
 const install = Vue => {
-  Vue.prototype.$_message = message => {
+  const messageFunc = message => {
     snackbar.add(message);
   };
+  messageFunc.hide = () => {
+    snackbar.hide();
+  };
+  Vue.prototype.$_message = messageFunc;
 };
 
 export const snackbarMixin = {

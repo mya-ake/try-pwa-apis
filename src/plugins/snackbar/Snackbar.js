@@ -5,6 +5,7 @@ export class Snackbar {
   }
 
   set mdcSnackbar(snackbar) {
+    console.log(snackbar);
     this._mdcSnackbar = snackbar;
     this._resetStackMessage();
   }
@@ -15,6 +16,13 @@ export class Snackbar {
       return;
     }
     this._mdcSnackbar.show(message);
+  }
+
+  hide() {
+    if (this._mdcSnackbar === null) {
+      return;
+    }
+    this._mdcSnackbar.hide();
   }
 
   destroy() {

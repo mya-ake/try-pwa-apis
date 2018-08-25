@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import { Home, WebPush } from './views';
 
 Vue.use(Router);
 
@@ -12,6 +12,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/web-push',
+      name: 'web-push',
+      component: WebPush,
     },
   ],
 });

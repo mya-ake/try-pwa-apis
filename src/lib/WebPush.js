@@ -8,24 +8,31 @@ export class WebPush {
     this._addTokenRefreshListener();
   }
 
-  async requestPermission() {
-    const response = await this._messaging.requestPermission().catch(err => {
-      // エラーのときは拒否されているとき
-      logger.name('web-push').error(err);
-    });
-    logger.name('web-push').info(response);
+  get APPROVED() {
+    return 'approved';
   }
 
-  async getToken() {
-    const token = await this._messaging.getToken().catch(err => {
+  get REJECTED() {
+    return 'rejected';
+  }
+
+  async requestPermission() {
+    const result = await this._messaging
+      .requestPermission()
+      .then(() => true)
+      .catch(err => {
+        // エラーのときは拒否されているとき
+        logger.name('web-push').error(err);
+        return false;
+      });
+    return result ? this.APPROVED : this.REJECTED;
+  }
+
+  getToken() {
+    return this._messaging.getToken().catch(err => {
       logger.name('web-push').error(err);
       return null;
     });
-    if (token === null) {
-      logger.name('web-push').info('no-token');
-    } else {
-      logger.name('web-push').info(`token:${token}`);
-    }
   }
 
   _addTokenRefreshListener() {
@@ -33,6 +40,8 @@ export class WebPush {
   }
 
   addMessageListener(listener) {
-    this._messaging.onMessage(listener);
+    this._messaging.onMessage(payload => {
+      listener({ payload, messaging: this._messaging });
+    });
   }
 }
