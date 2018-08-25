@@ -1,8 +1,20 @@
+const path = require('path');
 const externalWebpackConfig = require('./webpack.config');
+
+const resolve = pathname => {
+  return path.resolve(__dirname, pathname);
+};
 
 module.exports = {
   lintOnSave: true,
   productionSourceMap: false,
+  css: {
+    loaderOptions: {
+      sass: {
+        includePaths: [resolve('node_modules')],
+      },
+    },
+  },
   configureWebpack: externalWebpackConfig,
   chainWebpack: config => {
     // .mjs もトランスパイルの対象とするため

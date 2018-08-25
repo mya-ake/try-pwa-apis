@@ -19,7 +19,7 @@ if (isProduction) {
 
 module.exports = {
   resolve: {
-    extensions: ['.mjs'],
+    extensions: ['.mjs', '.scss'],
     alias: {
       '~~': __dirname,
     },
