@@ -86,9 +86,7 @@ export class WebPush {
     });
   }
 
-  addMessageListener(listener) {
-    this._messaging.onMessage(payload => {
-      listener({ payload, messaging: this._messaging });
-    });
+  addPushListener(listener) {
+    this._messaging.onMessage(listener);
   }
 }

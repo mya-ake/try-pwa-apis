@@ -57,6 +57,7 @@ export default {
         return;
       }
       await this.getToken();
+      this.setPushListener();
     },
 
     async getToken() {
@@ -77,6 +78,7 @@ export default {
       }
 
       await this.getToken();
+      this.setPushListener();
 
       this.$_message({
         message: 'プッシュ通知が設定されました',
@@ -108,6 +110,19 @@ export default {
     async clearToken() {
       this.token = null;
       await this.$_storage.save('enabledWebPush', false);
+    },
+
+    setPushListener() {
+      webPush.addPushListener(payload => {
+        const { data } = payload;
+
+        const notificationTitle = data.title;
+        const notificationOptions = {
+          body: data.body,
+          icon: '/icons/android-chrome-192x192.png',
+        };
+        new Notification(notificationTitle, notificationOptions);
+      });
     },
   },
 };
