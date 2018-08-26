@@ -46,13 +46,22 @@ export default {
     },
   },
 
-  mounted() {
-    this.getToken();
+  async mounted() {
+    await this.intialize();
   },
 
   methods: {
+    async intialize() {
+      const enabledWebPush = await this.$_storage.load('enabledWebPush');
+      if (enabledWebPush !== true) {
+        return;
+      }
+      await this.getToken();
+    },
+
     async getToken() {
       this.token = await webPush.getToken();
+      await this.$_storage.save('enabledWebPush', true);
       logger.info(`push token: ${this.token}`);
     },
 
@@ -66,7 +75,9 @@ export default {
         });
         return;
       }
+
       await this.getToken();
+
       this.$_message({
         message: 'プッシュ通知が設定されました',
         actionText: 'OK',
@@ -84,12 +95,19 @@ export default {
         });
         return;
       }
-      this.token = null;
+
+      await this.clearToken();
+
       this.$_message({
         message: 'プッシュ通知を解除しました',
         actionText: 'OK',
         actionHandler() {},
       });
+    },
+
+    async clearToken() {
+      this.token = null;
+      await this.$_storage.save('enabledWebPush', false);
     },
   },
 };
