@@ -8,19 +8,20 @@
       <span v-else-if="hasToken">設定済み</span>
       <span v-else>未設定</span>
     </p>
-    <base-button 
+    <base-button
       v-if="!hasToken"
       key="button-request-permission"
       :disabled="!usable"
+      :async-on-click="handleClickRequestPermission"
       type="button"
-      @click="handleClickRequestPermission"
+      unelevated
     >プッシュ通知を利用する</base-button>
-    <base-button 
+    <base-button
       v-else
       key="button-release-web-push"
       :disabled="!usable"
+      :async-on-click="handleClickReleaseWebPush"      
       type="button"
-      @click="handleClickReleaseWebPush"
     >プッシュ通知を解除する</base-button>
   </div>
 </template>
