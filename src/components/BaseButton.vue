@@ -1,7 +1,7 @@
 <template>
   <button 
     ref="button" 
-    class="base-button mdc-button"
+    class="base-button mdc-button mdc-button--raised"
     @click="$emit('click')"
   >
     <slot/>

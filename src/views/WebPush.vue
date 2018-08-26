@@ -4,15 +4,16 @@
 
     <p>
       <span>プッシュ通知：</span>
-      <span v-if="hasToken">設定済み</span>
+      <span v-if="usable === false">使用不可</span>
+      <span v-else-if="hasToken">設定済み</span>
       <span v-else>未設定</span>
     </p>
     <base-button 
       v-if="!hasToken"
-      v-cloak
+      :disabled="!usable"
       type="button"
       @click="handleClickRequestPermission"
-    >プッシュ通知を設定する</base-button>
+    >プッシュ通知を利用する</base-button>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ export default {
 
   data() {
     return {
+      usable: webPush.usable,
       token: null,
     };
   },
