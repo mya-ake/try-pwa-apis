@@ -10,15 +10,24 @@
     </p>
     <base-button 
       v-if="!hasToken"
+      key="button-request-permission"
       :disabled="!usable"
       type="button"
       @click="handleClickRequestPermission"
     >プッシュ通知を利用する</base-button>
+    <base-button 
+      v-else
+      key="button-release-web-push"
+      :disabled="!usable"
+      type="button"
+      @click="handleClickReleaseWebPush"
+    >プッシュ通知を解除する</base-button>
   </div>
 </template>
 
 <script>
 import webPush from '@/services/web-push';
+import logger from '~~/lib/logger';
 
 export default {
   name: 'WebPush',
@@ -43,6 +52,7 @@ export default {
   methods: {
     async getToken() {
       this.token = await webPush.getToken();
+      logger.info(`push token: ${this.token}`);
     },
 
     async handleClickRequestPermission() {
@@ -58,6 +68,24 @@ export default {
       await this.getToken();
       this.$_message({
         message: 'プッシュ通知が設定されました',
+        actionText: 'OK',
+        actionHandler() {},
+      });
+    },
+
+    async handleClickReleaseWebPush() {
+      const result = await webPush.deleteToken(this.token);
+      if (result === webPush.FAILED) {
+        this.$_message({
+          message: 'プッシュ通知の解除に失敗しました',
+          actionText: 'OK',
+          actionHandler() {},
+        });
+        return;
+      }
+      this.token = null;
+      this.$_message({
+        message: 'プッシュ通知を解除しました',
         actionText: 'OK',
         actionHandler() {},
       });

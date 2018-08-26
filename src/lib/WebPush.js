@@ -18,6 +18,14 @@ export class WebPush {
     return this._usable;
   }
 
+  get SUCCESS() {
+    return 'success';
+  }
+
+  get FAILED() {
+    return 'failed';
+  }
+
   get APPROVED() {
     return 'approved';
   }
@@ -39,7 +47,7 @@ export class WebPush {
       .then(() => true)
       .catch(err => {
         // エラーのときは拒否されているとき
-        logger.name('web-push').error(err);
+        logger.name('web-push:requestPermission').error(err);
         return false;
       });
     return result ? this.APPROVED : this.REJECTED;
@@ -50,13 +58,32 @@ export class WebPush {
       return null;
     }
     return this._messaging.getToken().catch(err => {
-      logger.name('web-push').error(err);
+      logger.name('web-push:getToken').error(err);
       return null;
     });
   }
 
+  deleteToken(token) {
+    if (this.usable === false) {
+      return this.FAILED;
+    }
+    return this._messaging
+      .deleteToken(token)
+      .then(result => {
+        return result === true ? this.SUCCESS : this.FAILED;
+      })
+      .catch(err => {
+        logger.name('web-push:deleteToken').error(err);
+        return this.FAILED;
+      });
+  }
+
   _addTokenRefreshListener() {
-    this._messaging.onTokenRefresh(this.getToken);
+    // トークンリフレッシュはまだ再現ができてないので仮コード
+    this._messaging.onTokenRefresh(() => {
+      logger.name('web-push').info('token refresh');
+      this.getToken();
+    });
   }
 
   addMessageListener(listener) {
