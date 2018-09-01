@@ -5,7 +5,7 @@
     <base-button 
       :disabled="!usableShareApi" 
       unelevated
-      @clcik="handleClickShare"
+      @click="handleClickShare"
     >Share!</base-button>
     <p v-if="!usableShareApi">Web Share APIが利用できないブラウザのようです。</p>
   </div>
@@ -24,6 +24,7 @@ export default {
   methods: {
     async handleClickShare() {
       try {
+        // キャンセルされるとハンドリングできないみたい（Promiseが解決されない）
         await window.navigator.share({
           title: document.title,
           text: 'Web Share API のサンプルです。',
