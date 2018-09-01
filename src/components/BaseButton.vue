@@ -59,7 +59,6 @@ export default {
         return;
       }
       if (this.processing === true) {
-        console.log('skip');
         return;
       }
       this.processing = true;
