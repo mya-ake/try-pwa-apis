@@ -3,9 +3,9 @@
     <h1>Web Share</h1>
 
     <base-button 
-      :async-on-click="handleClickShare" 
-      :disabled="!usableShareApi"
+      :disabled="!usableShareApi" 
       unelevated
+      @clcik="handleClickShare"
     >Share!</base-button>
     <p v-if="!usableShareApi">Web Share APIが利用できないブラウザのようです。</p>
   </div>
