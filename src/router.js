@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { Home, WebPush } from './views';
+import { Home, WebPush, WebShare } from './views';
 
 Vue.use(Router);
 
@@ -17,6 +17,11 @@ export default new Router({
       path: '/web-push',
       name: 'web-push',
       component: WebPush,
+    },
+    {
+      path: '/web-share',
+      name: 'web-share',
+      component: WebShare,
     },
   ],
 });
