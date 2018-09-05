@@ -15,7 +15,6 @@ export default () => {
     .register('./sw.js')
     .then(registration => {
       logger.name('sw').info('success', registration);
-      registration.unregister();
     })
     .catch(err => {
       logger.name('sw').error(err);
