@@ -4,7 +4,7 @@
 
 const workboxPlugin = require('workbox-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production_test';
 
 const plugins = [];
 if (isProduction) {
