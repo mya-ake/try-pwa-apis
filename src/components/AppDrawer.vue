@@ -1,10 +1,9 @@
 <template>
   <aside
-    ref="drawer"
     class="mdc-drawer mdc-drawer--modal">
     <div class="mdc-drawer__content">
       <nav
-        rel="list"
+        ref="list"
         class="mdc-list">
         <a
           class="mdc-list-item mdc-list-item--activated"
@@ -44,7 +43,7 @@ export default {
 
   methods: {
     initializeMDC() {
-      MDCDrawer.attachTo(this.$refs.drawer);
+      MDCDrawer.attachTo(this.$el);
       MDCList.attachTo(this.$refs.list);
     },
   },
@@ -52,6 +51,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@material/list/mdc-list';
-@import '@material/drawer/mdc-drawer';
 </style>

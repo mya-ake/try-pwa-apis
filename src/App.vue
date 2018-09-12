@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <app-drawer/>
+    <div class="mdc-drawer-scrim"/>
     <app-bar/>
 
-    <main class="main">
+    <main class="main mdc-top-app-bar--fixed-adjust">
       <router-view/>
     </main>
 
@@ -22,7 +23,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   position: relative;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -34,6 +35,5 @@ export default {
 
 .main {
   display: block;
-  margin-top: 64px;
 }
 </style>

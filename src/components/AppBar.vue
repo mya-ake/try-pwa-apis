@@ -13,7 +13,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@material/top-app-bar/mdc-top-app-bar';
+@import '@material/top-app-bar/_mixins';
 
 .app-bar {
   @include mdc-top-app-bar-fill-color(teal);
