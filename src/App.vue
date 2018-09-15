@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <app-drawer/>
+    <app-drawer ref="drawer"/>
     <div class="mdc-drawer-scrim"/>
-    <app-bar/>
-
-    <main class="main mdc-top-app-bar--fixed-adjust">
+    <app-bar
+      ref="appBar"
+      @click-menu="handleClickMenu"/>
+    <main
+      ref="main"
+      class="main mdc-top-app-bar--fixed-adjust">
       <router-view/>
     </main>
 
@@ -19,6 +22,16 @@ export default {
   components: {
     AppBar,
     AppDrawer,
+  },
+
+  mounted() {
+    this.$refs.appBar.$emit('set-main', this.$refs.main);
+  },
+
+  methods: {
+    handleClickMenu() {
+      this.$refs.drawer.$emit('open');
+    },
   },
 };
 </script>
