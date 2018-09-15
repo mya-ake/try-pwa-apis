@@ -16,6 +16,7 @@
     "@material/list": "^0.39.1",
     "@material/ripple": "^0.39.1",
     "@material/snackbar": "^0.39.1",
+    "@material/theme": "^0.39.1",
     "@material/top-app-bar": "^0.39.1",
     "firebase": "^5.4.0",
     "localforage": "^1.7.2",

@@ -5,28 +5,18 @@
       <nav
         ref="list"
         class="mdc-list">
-        <a
-          class="mdc-list-item mdc-list-item--activated"
-          href="#"
-          aria-selected="true">
+        <router-link
+          v-for="menu in menus"
+          :key="menu.to"
+          :to="menu.to"
+          :aria-selected="menu.selected"
+          class="mdc-list-item drawer__item"
+          tabindex="0">
           <i
             class="material-icons mdc-list-item__graphic"
-            aria-hidden="true">inbox</i>Inbox
-        </a>
-        <a
-          class="mdc-list-item"
-          href="#">
-          <i
-            class="material-icons mdc-list-item__graphic"
-            aria-hidden="true">send</i>Outgoing
-        </a>
-        <a
-          class="mdc-list-item"
-          href="#">
-          <i
-            class="material-icons mdc-list-item__graphic"
-            aria-hidden="true">drafts</i>Drafts
-        </a>
+            aria-hidden="true">{{ menu.icon }}</i>
+          <span>{{ menu.label }}</span>
+        </router-link>
       </nav>
     </div>
   </aside>
@@ -36,11 +26,56 @@
 import { MDCList } from '@material/list';
 import { MDCDrawer } from '@material/drawer';
 
+const menus = [
+  {
+    label: 'Home',
+    icon: 'home',
+    to: '/',
+  },
+  {
+    label: 'Web Push',
+    icon: 'notifications',
+    to: '/web-push',
+  },
+  {
+    label: 'Web Share',
+    icon: 'share',
+    to: '/web-share',
+  },
+];
+
 export default {
   data() {
     return {
       drawer: null,
+      list: null,
+      selectedIndex: 0,
     };
+  },
+
+  computed: {
+    menus() {
+      return menus.map((menu, index) => {
+        menu.selected = index === this.selectedIndex;
+        return menu;
+      });
+    },
+
+    activePath() {
+      return this.$route.path;
+    },
+  },
+
+  watch: {
+    activePath: {
+      async handler(path) {
+        this.selectedIndex = this.findIndexActivePath(path);
+        await this.$nextTick();
+        this.list.foundation_.setSelectedIndex(this.selectedIndex);
+        this.close();
+      },
+      immediate: true,
+    },
   },
 
   mounted() {
@@ -51,7 +86,9 @@ export default {
   methods: {
     initializeMDC() {
       this.drawer = MDCDrawer.attachTo(this.$el);
-      MDCList.attachTo(this.$refs.list);
+      this.list = MDCList.attachTo(this.$refs.list);
+      this.list.foundation_.setSingleSelection(true);
+      this.list.foundation_.setWrapFocus(true);
     },
 
     attachHandler() {
@@ -74,9 +111,10 @@ export default {
     handleClose() {
       this.close();
     },
+
+    findIndexActivePath(path) {
+      return this.menus.findIndex(menu => menu.to === path);
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>
