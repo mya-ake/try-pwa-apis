@@ -7,6 +7,7 @@
         class="mdc-list">
         <router-link
           v-for="menu in menus"
+          ref="listItems"
           :key="menu.to"
           :to="menu.to"
           :aria-selected="menu.selected"
@@ -25,6 +26,7 @@
 <script>
 import { MDCList } from '@material/list';
 import { MDCDrawer } from '@material/drawer';
+import { MDCRipple } from '@material/ripple';
 
 const menus = [
   {
@@ -73,6 +75,7 @@ export default {
         await this.$nextTick();
         this.list.foundation_.setSelectedIndex(this.selectedIndex);
         this.close();
+        this.setRipple();
       },
       immediate: true,
     },
@@ -114,6 +117,10 @@ export default {
 
     findIndexActivePath(path) {
       return this.menus.findIndex(menu => menu.to === path);
+    },
+
+    setRipple() {
+      this.$refs.listItems.forEach(vm => new MDCRipple(vm.$el));
     },
   },
 };
