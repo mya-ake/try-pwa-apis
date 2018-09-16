@@ -82,6 +82,9 @@ jobs:
           name: Change directory
           command: cd packages/push-server
       - run:
+          name: check dir
+          command: pwd
+      - run:
           name: Install modules
           command: yarn install
       - save_cache:
