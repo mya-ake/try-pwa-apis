@@ -25,7 +25,7 @@ export default {
   },
 
   mounted() {
-    this.$refs.appBar.$emit('set-main', this.$refs.main);
+    this.$refs.appBar.$emit('set-main', document.body);
   },
 
   methods: {
