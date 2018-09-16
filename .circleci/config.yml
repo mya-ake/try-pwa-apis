@@ -7,12 +7,12 @@ defaults: &defaults
   environment:
     TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
-# push-server: &:push-server
-#   working_directory: ~/repo
-#   docker:
-#     - image: circleci/node:8.10
-#   environment:
-#     TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+push-server: &:push-server
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.10
+  environment:
+    TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
 jobs:
   install:
