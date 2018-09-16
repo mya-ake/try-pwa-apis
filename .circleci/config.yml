@@ -81,17 +81,15 @@ jobs:
       - run:
           name: list
           command: ls
-      - run:
-          name: Change directory
-          command:
-            - cd packages/push-server
-            - pwd
+          working_directory: packages/push-server
       - run:
           name: check dir
           command: pwd
+          working_directory: packages/push-server
       - run:
           name: Install modules
           command: yarn install
+          working_directory: packages/push-server
       - save_cache:
           paths:
             - node_modules
