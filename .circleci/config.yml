@@ -80,7 +80,7 @@ jobs:
           - v1-push-server-dependencies-
       - run:
           name: Change directory
-          commnad: cd packages/push-server
+          command: cd packages/push-server
       - run:
           name: Install modules
           command: yarn install
