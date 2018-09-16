@@ -100,8 +100,12 @@ jobs:
           command: yarn global add serverless
           working_directory: packages/push-server
       - run:
+          name: check serverless
+          command: serverless -v
+          working_directory: packages/push-server
+      - run:
           name: Deploy
-          command: sls deploy
+          command: serverless deploy
           working_directory: packages/push-server
 
 workflows:
