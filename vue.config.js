@@ -19,5 +19,13 @@ module.exports = {
   chainWebpack: config => {
     // .mjs もトランスパイルの対象とするため
     config.module.rule('js').test(/\.m?jsx?$/);
+    // doc ブロックの loader を定義（なにもしない）
+    config.module
+      .rule('doc')
+      .oneOf('doc')
+      .resourceQuery(/blockType=doc/)
+      .use('through-loader')
+      .loader(require.resolve('./loaders/through-loader.js'))
+      .end();
   },
 };

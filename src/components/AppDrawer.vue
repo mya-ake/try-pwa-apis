@@ -1,3 +1,8 @@
+<doc>
+list の tabindex の挙動がおかしい
+  -> https://github.com/mya-ake/try-pwa-apis/issues/4
+</doc>
+
 <template>
   <aside
     class="mdc-drawer mdc-drawer--modal">
@@ -11,12 +16,13 @@
           :key="menu.to"
           :to="menu.to"
           :aria-selected="menu.selected"
-          class="mdc-list-item drawer__item"
-          tabindex="0">
+          :tabindex="menu.selected ? '-1' : '0'"
+          :class="{ 'mdc-list-item--selected': menu.selected }"
+          class="mdc-list-item drawer__item">
           <i
             class="material-icons mdc-list-item__graphic"
             aria-hidden="true">{{ menu.icon }}</i>
-          <span>{{ menu.label }}</span>
+          <span>{{ menu.label }} {{ menu.selecte }}</span>
         </router-link>
       </nav>
     </div>
@@ -24,7 +30,6 @@
 </template>
 
 <script>
-import { MDCList } from '@material/list';
 import { MDCDrawer } from '@material/drawer';
 import { MDCRipple } from '@material/ripple';
 
@@ -50,7 +55,6 @@ export default {
   data() {
     return {
       drawer: null,
-      list: null,
       selectedIndex: 0,
     };
   },
@@ -72,8 +76,7 @@ export default {
     activePath: {
       async handler(path) {
         this.selectedIndex = this.findIndexActivePath(path);
-        await this.$nextTick();
-        this.list.foundation_.setSelectedIndex(this.selectedIndex);
+        await this.$nextTick(); // DOM に反映されるのを待つ
         this.close();
         this.setRipple();
       },
@@ -89,9 +92,6 @@ export default {
   methods: {
     initializeMDC() {
       this.drawer = MDCDrawer.attachTo(this.$el);
-      this.list = MDCList.attachTo(this.$refs.list);
-      this.list.foundation_.setSingleSelection(true);
-      this.list.foundation_.setWrapFocus(true);
     },
 
     attachHandler() {
