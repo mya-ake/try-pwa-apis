@@ -96,8 +96,12 @@ jobs:
           - v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
           - v1-push-server-dependencies-
       - run:
+          name: Install serverless
+          command: yarn global add serverless
+          working_directory: packages/push-server
+      - run:
           name: Deploy
-          command: yarn sls deploy
+          command: sls deploy
           working_directory: packages/push-server
 
 workflows:
