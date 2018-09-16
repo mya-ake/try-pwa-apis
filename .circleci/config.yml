@@ -7,12 +7,12 @@ defaults: &defaults
   environment:
     TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
-push-server: &:push-server
-  working_directory: ~/repo
-  docker:
-    - image: circleci/node:8.10
-  environment:
-    TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+# push-server: &:push-server
+#   working_directory: ~/repo
+#   docker:
+#     - image: circleci/node:8.10
+#   environment:
+#     TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
 jobs:
   install:
@@ -70,24 +70,24 @@ jobs:
           name: Deploy
           command: yarn deploy
 
-  install-push-server:
-    <<: *push-server
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
-          - v1-push-server-dependencies-
-      - run:
-          name: Change directory
-          commnad: cd packages/push-server
-      - run:
-          name: Install modules
-          command: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+  # install-push-server:
+  #   <<: *push-server
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #         - v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+  #         - v1-push-server-dependencies-
+  #     - run:
+  #         name: Change directory
+  #         commnad: cd packages/push-server
+  #     - run:
+  #         name: Install modules
+  #         command: yarn install
+  #     - save_cache:
+  #         paths:
+  #           - node_modules
+  #         key: v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
 
 workflows:
   version: 2
