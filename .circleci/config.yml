@@ -83,7 +83,9 @@ jobs:
           command: ls
       - run:
           name: Change directory
-          command: cd packages/push-server
+          command:
+            - cd packages/push-server
+            - pwd
       - run:
           name: check dir
           command: pwd
