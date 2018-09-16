@@ -24,6 +24,8 @@ package:
 functions:
   hello:
     handler: handler.hello
+    timeout: 30
+    memorySize: 128
 
 
 resources:
