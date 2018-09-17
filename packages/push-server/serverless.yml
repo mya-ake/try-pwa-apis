@@ -1,7 +1,7 @@
 service:
   name: ${self:custom.NAME}
 
-frameworkVersion: ">=1.30.0"
+frameworkVersion: ">=1.31.0"
 
 provider:
   name: aws
@@ -10,7 +10,7 @@ provider:
   stage: dev
 
 custom:
-  NAME: try-pwa-push-server
+  NAME: try-pwa-push-manager
 
 package:
   excludeDevDependencies: true
@@ -22,11 +22,14 @@ package:
     - node_modules/aws-sdk/**
 
 functions:
-  hello:
+  handler:
     handler: handler.hello
-    timeout: 28
+    timeout: 30
     memorySize: 128
-
+    events:
+      - http:
+          path: '/'
+          method: get
 
 resources:
  Resources:
