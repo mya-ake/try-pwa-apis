@@ -1,6 +1,7 @@
 const { initilizeFirebase } = require('./../../middleware');
 const Request = require('./../../core/Request');
 const { FirebaseMessaging } = require('./../../firebase');
+const logger = require('./../../../utils/logger');
 
 const main = async event => {
   await initilizeFirebase();
@@ -17,15 +18,13 @@ const main = async event => {
   }
 
   const messaging = new FirebaseMessaging();
-  const result = await messaging
-    .notify({
-      title: 'Test notification',
-      body: 'test body',
-      token,
-    })
-    .catch(err => console.log('[error]', err) || null);
+  const result = await messaging.notify({
+    title: 'Test notification',
+    body: 'test body',
+    token,
+  });
 
-  console.log('[info:messaging:result]', result);
+  logger.name('messaging:result').info(result);
 
   if (result.isError) {
     return {
