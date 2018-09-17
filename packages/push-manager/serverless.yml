@@ -22,14 +22,14 @@ package:
     - node_modules/aws-sdk/**
 
 functions:
-  handler:
-    handler: handler.hello
+  notify:
+    handler: handler.notify
     timeout: 30
     memorySize: 128
     events:
       - http:
-          path: '/'
-          method: get
+          path: '/notify'
+          method: post
 
 resources:
  Resources:
