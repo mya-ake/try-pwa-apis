@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "sls": "sls",
+    "sls": "sls"
   },
   "devDependencies": {
     "serverless": "^1.31.0"
