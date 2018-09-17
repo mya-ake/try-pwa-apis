@@ -1,3 +1,4 @@
+console.log('firebase firebase');
 const firebaseAdmin = require('firebase-admin');
 
 const initialize = serviceAccount => {
