@@ -7,7 +7,7 @@ defaults: &defaults
   environment:
     TZ: "/usr/share/zoneinfo/Asia/Tokyo"
 
-push-server: &push-server
+push-manager: &push-manager
   working_directory: ~/repo
   docker:
     - image: circleci/node:8.10
@@ -70,39 +70,39 @@ jobs:
           name: Deploy
           command: yarn deploy
 
-  install-push-server:
-    <<: *push-server
+  install-push-manager:
+    <<: *push-manager
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
-          - v1-push-server-dependencies-
+          - v1-push-manager-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-push-manager-dependencies-
       - run:
           name: Install modules
           command: yarn install
-          working_directory: packages/push-server
+          working_directory: packages/push-manager
       - save_cache:
           paths:
             - node_modules
-          key: v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          key: v1-push-manager-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
 
-  deploy-push-server:
-    <<: *push-server
+  deploy-push-manager:
+    <<: *push-manager
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-push-server-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
-          - v1-push-server-dependencies-
+          - v1-push-manager-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
+          - v1-push-manager-dependencies-
       - run:
           name: Install serverless
           command: sudo yarn global add serverless
-          working_directory: packages/push-server
+          working_directory: packages/push-manager
       - run:
           name: Deploy
           command: sls deploy
-          working_directory: packages/push-server
+          working_directory: packages/push-manager
 
 workflows:
   version: 2
@@ -139,17 +139,17 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v[0-9]+(\.[0-9]+){2}$/
-      - install-push-server:
+      - install-push-manager:
           filters:
             branches:
               only: /.*/
             tags:
-              only: /^push-server-v[0-9]+(\.[0-9]+){2}$/
-      - deploy-push-server:
+              only: /^push-manager-v[0-9]+(\.[0-9]+){2}$/
+      - deploy-push-manager:
           requires:
-            - install-push-server
+            - install-push-manager
           filters:
             branches:
               only: /.*/
             tags:
-              only: /^push-server-v[0-9]+(\.[0-9]+){2}$/
+              only: /^push-manager-v[0-9]+(\.[0-9]+){2}$/
