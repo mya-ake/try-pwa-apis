@@ -1,5 +1,6 @@
 console.log('firebase load key');
 
+console.log('firebase load key, before aws sdk');
 const AWS = require('aws-sdk');
 console.log('firebase load key, after aws sdk');
 const KMS = new AWS.KMS({ apiVersion: '2014-11-01', region: 'ap-northeast-1' });
