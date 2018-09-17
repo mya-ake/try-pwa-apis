@@ -1,3 +1,4 @@
+console.log('notify');
 const { initilizeFirebase } = require('../../middleware');
 
 const main = async input => {
@@ -10,4 +11,5 @@ const main = async input => {
   };
 };
 
+console.log('export notify');
 module.exports = main;
