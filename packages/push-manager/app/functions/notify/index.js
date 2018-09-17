@@ -1,5 +1,5 @@
 console.log('notify');
-const { initilizeFirebase } = require('../../middleware');
+const { initilizeFirebase } = require('./../../middleware');
 
 const main = async input => {
   await initilizeFirebase();

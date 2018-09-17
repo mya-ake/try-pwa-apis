@@ -1,3 +1,4 @@
+console.log('firebase index');
 const { join } = require('path');
 const { initialize, FirebaseMessaging } = require('./firebase');
 const { loadKey } = require('./load-key');
