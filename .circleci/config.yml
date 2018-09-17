@@ -85,7 +85,7 @@ jobs:
       - save_cache:
           paths:
             - packages/push-manager/node_modules
-          key: v1-push-manager-dependencies-{{ checksum "packages/ush-manager/package.json" }}--{{ checksum "packages/push-manager/arn.lock" }}
+          key: v1-push-manager-dependencies-{{ checksum "packages/push-manager/package.json" }}--{{ checksum "packages/push-manager/arn.lock" }}
 
   deploy-push-manager:
     <<: *push-manager
