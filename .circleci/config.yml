@@ -84,7 +84,7 @@ jobs:
           working_directory: packages/push-manager
       - save_cache:
           paths:
-            - node_modules
+            - packages/push-manager/node_modules
           key: v1-push-manager-dependencies-{{ checksum "package.json" }}--{{ checksum "yarn.lock" }}
 
   deploy-push-manager:
