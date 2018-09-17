@@ -100,10 +100,6 @@ jobs:
           command: sudo yarn global add serverless
           working_directory: packages/push-manager
       - run:
-          name: Check files
-          command: ls
-          working_directory: packages/push-manager
-      - run:
           name: Deploy
           command: sls deploy
           working_directory: packages/push-manager
