@@ -1,5 +1,6 @@
 console.log('firebase firebase');
 const firebaseAdmin = require('firebase-admin');
+console.log('firebase firebase after');
 
 const initialize = serviceAccount => {
   firebaseAdmin.initializeApp({
