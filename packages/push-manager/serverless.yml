@@ -19,7 +19,6 @@ package:
     - package.json
     - yarn.lock
     - firebase-access-key.json
-    - node_modules/aws-sdk/**
 
 functions:
   notify:
