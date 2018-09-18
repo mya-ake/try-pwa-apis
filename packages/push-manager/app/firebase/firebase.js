@@ -5,9 +5,6 @@ const isInitialized = () => {
 };
 
 const initialize = serviceAccount => {
-  if (isInitialized()) {
-    return;
-  }
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccount),
   });
@@ -43,6 +40,7 @@ class FirebaseMessaging {
 }
 
 module.exports = {
+  isInitialized,
   initialize,
   FirebaseMessaging,
 };
