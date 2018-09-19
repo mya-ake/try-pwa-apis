@@ -4,25 +4,22 @@ module.exports = {
     node: true,
     serviceworker: true,
   },
-  'extends': [
-    'plugin:vue/recommended',
-    '@vue/prettier'
-  ],
+  extends: ['plugin:vue/recommended', '@vue/prettier'],
   rules: {
     'prettier/prettier': [
       'error',
       {
-        'singleQuote': true,
-        'trailingComma': 'all',
-      }
+        singleQuote: true,
+        trailingComma: 'all',
+      },
     ],
     'no-console': 'off',
-    'no-debugger': 'off'
+    'no-debugger': 'off',
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   globals: {
     firebase: true,
   },
-}
+};
