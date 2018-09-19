@@ -2,11 +2,19 @@
  * このwebpack.config.jsはvue.config.jsでimportして使う
  */
 
+const webpack = require('webpack');
 const workboxPlugin = require('workbox-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const plugins = [];
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      API_KEY: JSON.stringify(process.env.API_KEY),
+    },
+  }),
+];
+
 if (isProduction) {
   plugins.push(
     new workboxPlugin.GenerateSW({

@@ -8,6 +8,7 @@ import store from './store';
 
 import snackbar from './plugins/snackbar/index';
 import storage from './plugins/storage';
+import axios from './plugins/axios';
 
 import * as components from './components';
 import { importBaseComponents } from './lib/utils';
@@ -18,6 +19,12 @@ Vue.config.productionTip = false;
 
 Vue.use(snackbar);
 Vue.use(storage, { name: 'app' });
+Vue.use(axios, {
+  baseURL: 'https://push-manager.try-pwa.mya-ake.org',
+  headers: {
+    'x-api-key': process.env.API_KEY,
+  },
+});
 
 importBaseComponents(Vue, components);
 

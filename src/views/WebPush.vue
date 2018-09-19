@@ -8,22 +8,35 @@
       <span v-else-if="hasToken">設定済み</span>
       <span v-else>未設定</span>
     </p>
-    <base-button
-      v-if="!hasToken"
-      key="button-request-permission"
-      :disabled="!usable"
-      :async-on-click="handleClickRequestPermission"
-      type="button"
-      unelevated
-    >プッシュ通知を利用する</base-button>
-    <base-button
-      v-else
-      key="button-release-web-push"
-      :disabled="!usable"
-      :async-on-click="handleClickReleaseWebPush"      
-      type="button"
-    >プッシュ通知を解除する</base-button>
+    <div class="row">
+      <base-button
+        v-if="!hasToken"
+        key="button-request-permission"
+        :disabled="!usable"
+        :async-on-click="handleClickRequestPermission"
+        type="button"
+        unelevated
+      >プッシュ通知を利用する</base-button>
+      <base-button
+        v-else
+        key="button-release-web-push"
+        :disabled="!usable"
+        :async-on-click="handleClickReleaseWebPush"
+        type="button"
+      >プッシュ通知を解除する</base-button>
+    </div>
+
+    <div class="row">
+      <base-button
+        v-if="hasToken"
+        :disabled="!usable"
+        :async-on-click="handleClickNotify"
+        type="button"
+        unelevated
+      >プッシュ通知する</base-button>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -124,6 +137,23 @@ export default {
         new Notification(notificationTitle, notificationOptions);
       });
     },
+
+    async handleClickNotify() {
+      const response = await this.$_axios
+        .post('/notify', {
+          token: this.token,
+        })
+        .catch(err => err.response);
+      console.log(response);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.row {
+  &:not(:last-child) {
+    padding-bottom: 24px;
+  }
+}
+</style>
