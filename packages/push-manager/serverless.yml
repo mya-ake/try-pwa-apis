@@ -7,7 +7,9 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: ap-northeast-1
-  stage: dev
+  stage: ${self:custom.STAGE}
+  apiKeys:
+    - ${self:custom.NAME}-${self:custom.STAGE}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -17,6 +19,7 @@ provider:
 
 custom:
   NAME: try-pwa-push-manager
+  STAGE: dev
 
 package:
   excludeDevDependencies: true
@@ -36,10 +39,6 @@ functions:
       - http:
           path: '/notify'
           method: post
-
-resources:
- Resources:
-   S3Bucketi:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: storage.try-pwa.mya-ake.org
+          private: true
+          cors:
+            origin: '*'

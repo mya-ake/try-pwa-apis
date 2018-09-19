@@ -11,6 +11,10 @@ const main = async event => {
   if (token === null) {
     return {
       statusCode: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-store, no-cache, max-age=0',
+      },
       body: JSON.stringify({
         message: 'Bad Request',
       }),
@@ -29,6 +33,10 @@ const main = async event => {
   if (result.isError) {
     return {
       statusCode: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'no-store, no-cache, max-age=0',
+      },
       body: JSON.stringify({
         message: result.response.message,
       }),
@@ -36,6 +44,10 @@ const main = async event => {
   }
   return {
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-store, no-cache, max-age=0',
+    },
     body: JSON.stringify({
       message: 'ok',
     }),
