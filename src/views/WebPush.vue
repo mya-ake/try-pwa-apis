@@ -33,7 +33,7 @@
         :async-on-click="handleClickNotify"
         type="button"
         unelevated
-      >プッシュ通知する</base-button>
+      >プッシュ通知を試す</base-button>
     </div>
   </div>
 
