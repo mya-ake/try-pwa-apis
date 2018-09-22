@@ -12,7 +12,7 @@ export default () => {
     return;
   }
   window.navigator.serviceWorker
-    .register('./sw.js')
+    .register('/sw.js')
     .then(registration => {
       logger.name('sw').info('success', registration);
     })
