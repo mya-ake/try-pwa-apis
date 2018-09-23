@@ -20,7 +20,7 @@ if (isProduction) {
     new workboxPlugin.GenerateSW({
       swDest: 'sw.js',
       clientsClaim: true,
-      skipWaiting: false,
+      skipWaiting: true,
     }),
   );
 }
