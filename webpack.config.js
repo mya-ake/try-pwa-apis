@@ -21,6 +21,7 @@ if (isProduction) {
       swDest: 'sw.js',
       clientsClaim: true,
       skipWaiting: true,
+      navigateFallback: '/index.html',
     }),
   );
 }
