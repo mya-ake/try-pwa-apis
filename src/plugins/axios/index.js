@@ -2,7 +2,12 @@ import axios from 'axios';
 
 const install = (Vue, config) => {
   const client = axios.create(config);
-  Vue.prototype.$_axios = client;
+
+  Object.defineProperty(Vue.prototype, '$_axios', {
+    get() {
+      return client;
+    },
+  });
 };
 
 export default {
