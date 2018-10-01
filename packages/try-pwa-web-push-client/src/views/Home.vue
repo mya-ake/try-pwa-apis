@@ -15,8 +15,9 @@ export default {
     HelloWorld
   },
 
-  mounted() {
-    console.log(this.$_axios);
+  async mounted() {
+    const response = await this.$_axios.get("/");
+    console.log(response);
   }
 };
 </script>
