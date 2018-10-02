@@ -1,7 +1,6 @@
 const firebaseMessaging = require('./../services/firebase-messaging');
 
 const notifyValidator = params => {
-  console.log(params);
   if ('token' in params === false) {
     return {
       status: 400,
@@ -13,6 +12,7 @@ const notifyValidator = params => {
 
 const notify = async (req, res) => {
   const params = req.body || {};
+  console.log('[info]', 'Request params', req.originalUrl, params);
   const validateResult = notifyValidator(params);
   if (validateResult !== null) {
     const { status, message } = validateResult;
@@ -27,7 +27,7 @@ const notify = async (req, res) => {
     body: 'web push notifications test',
     token,
   });
-  console.log('[info]', 'token result', result);
+  console.log('[info]', 'Notify result', result);
 
   if (result.isError) {
     const { message } = result.response;
