@@ -10,7 +10,7 @@ export class WebPush {
     }
     this._messaging.usePublicVapidKey(publicKey);
 
-    this._addTokenRefreshListener();
+    this._addTokenRefreshHandler();
     return this;
   }
 
@@ -78,7 +78,7 @@ export class WebPush {
       });
   }
 
-  _addTokenRefreshListener() {
+  _addTokenRefreshHandler() {
     // トークンリフレッシュはまだ再現ができてないので仮コード
     this._messaging.onTokenRefresh(() => {
       logger.name('web-push').info('token refresh');
@@ -86,7 +86,7 @@ export class WebPush {
     });
   }
 
-  addPushListener(listener) {
-    this._messaging.onMessage(listener);
+  addPushHandler(handler) {
+    this._messaging.onMessage(handler);
   }
 }

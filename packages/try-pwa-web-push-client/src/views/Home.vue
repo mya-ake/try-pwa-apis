@@ -57,9 +57,7 @@ export default {
   },
 
   filters: {
-    usable(flg) {
-      return flg === true ? "⭕" : "❌";
-    }
+    usable: flg => (flg === true ? "⭕" : "❌")
   },
 
   computed: {

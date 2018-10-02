@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Firebase from "./plugins/firebase";
 
-import { appConfig, messagingConfig } from "./config/firebase-config";
+import { appConfig, messagingConfig } from "./configs/firebase-config";
 
 Vue.use(Firebase, {
   appConfig,
   messagingConfig
 });
 
-Vue.$_webPush.addPushListener(payload => {
+Vue.$_webPush.addPushHandler(payload => {
   console.log("[info]", "Received foreground message", payload);
   const { data } = payload;
 

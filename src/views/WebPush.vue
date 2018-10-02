@@ -126,7 +126,7 @@ export default {
     },
 
     setPushListener() {
-      webPush.addPushListener(payload => {
+      webPush.addPushHandler(payload => {
         const { data } = payload;
 
         const notificationTitle = data.title;
