@@ -1,4 +1,4 @@
-import { FirebaseApp } from "./core";
+import { FirebaseApp } from "./core/FirebaseApp";
 import { WebPush } from "./services/WebPush";
 
 const install = (Vue, { appConfig, messagingConfig } = {}) => {
