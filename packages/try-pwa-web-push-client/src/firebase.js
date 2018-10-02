@@ -7,3 +7,14 @@ Vue.use(Firebase, {
   appConfig,
   messagingConfig
 });
+
+Vue.$_webPush.addPushListener(payload => {
+  const { data } = payload;
+
+  const notificationTitle = data.title;
+  const notificationOptions = {
+    body: data.body,
+    icon: "/icons/android-chrome-192x192.png"
+  };
+  new Notification(notificationTitle, notificationOptions);
+});

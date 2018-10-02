@@ -10,6 +10,7 @@ const install = (Vue, { appConfig, messagingConfig } = {}) => {
     publicKey: messagingConfig.publicKey
   });
 
+  Vue.$_webPush = webPush;
   Object.defineProperty(Vue.prototype, "$_webPush", {
     get() {
       return webPush;
