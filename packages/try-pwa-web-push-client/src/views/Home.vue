@@ -16,8 +16,7 @@ export default {
   },
 
   async mounted() {
-    const response = await this.$_axios.get("/");
-    console.log(response);
+    console.log(this);
   }
 };
 </script>
