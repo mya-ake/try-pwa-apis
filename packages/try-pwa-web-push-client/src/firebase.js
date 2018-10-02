@@ -9,7 +9,7 @@ Vue.use(Firebase, {
 });
 
 Vue.$_webPush.addPushListener(payload => {
-  console.log("[info]", "Received notification", payload);
+  console.log("[info]", "Received foreground message", payload);
   const { data } = payload;
 
   const notificationTitle = data.title;
