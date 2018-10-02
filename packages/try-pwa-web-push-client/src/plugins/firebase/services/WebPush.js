@@ -85,6 +85,9 @@ export class WebPush {
   }
 
   addPushListener(listener) {
+    if (this.usable === false) {
+      return;
+    }
     this._messaging.onMessage(listener);
   }
 }

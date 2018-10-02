@@ -9,4 +9,12 @@ export class FirebaseApp {
   get app() {
     return this._app;
   }
+
+  createMessaging() {
+    try {
+      return this.app.messaging();
+    } catch (err) {
+      return null;
+    }
+  }
 }

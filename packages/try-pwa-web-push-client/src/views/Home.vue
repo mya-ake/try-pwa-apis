@@ -128,7 +128,7 @@ export default {
 
     async clearToken() {
       this.token = null;
-      await this.$_storage.save("push-token", null);
+      await this.$_storage.delete("push-token");
     }
   }
 };

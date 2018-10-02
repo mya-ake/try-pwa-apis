@@ -1,7 +1,7 @@
 import localForage from "localforage";
 import { Storage } from "./Storage";
 
-const install = (Vue, { name } = {}) => {
+const install = (Vue, { name = "app-storage" } = {}) => {
   const db = localForage.createInstance({
     name
   });
