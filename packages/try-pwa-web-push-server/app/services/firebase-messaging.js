@@ -5,6 +5,13 @@ const messaging = firebaseAdmin.messaging();
 const notify = ({ title, body, token }) => {
   return messaging
     .send({
+      webpush: {
+        notification: {
+          title,
+          body,
+          click_action: 'http://localhost:8080/',
+        },
+      },
       data: {
         title,
         body,
