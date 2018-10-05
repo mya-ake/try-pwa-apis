@@ -1,0 +1,53 @@
+service:
+  name: ${self:custom.NAME}
+
+frameworkVersion: ">=1.32.0"
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ap-northeast-1
+  stage: ${self:custom.STAGE}
+  profile: my
+  apiKeys:
+    - ${self:custom.NAME}-${self:custom.STAGE}
+
+custom:
+  NAME: try-pwa-web-push-server
+  STAGE: dev
+  CORS: ${file(./app.config.js):exporter.CORS}
+  CORS_ALLOW_ORIGIN: ${self:custom.CORS.ORIGIN}
+
+package:
+  excludeDevDependencies: true
+  exclude:
+    - .*
+    - package.json
+    - yarn.lock
+
+functions:
+  notify:
+    handler: handler.handler
+    timeout: 5
+    memorySize: 128
+    environment:
+      CORS_ALLOW_ORIGIN: ${self:custom.CORS.ORIGIN}
+    events:
+      - http:
+          path: '/'
+          method: get
+          private: true
+          cors:
+            origin: ${self:custom.CORS.ORIGIN}
+      - http:
+          path: '{proxy+}'
+          method: post
+          private: true
+          cors:
+            origin: ${self:custom.CORS.ORIGIN}
+      - http:
+          path: '{proxy+}'
+          method: get
+          private: true
+          cors:
+            origin: ${self:custom.CORS.ORIGIN}

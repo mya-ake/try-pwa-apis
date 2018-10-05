@@ -1,10 +1,9 @@
+const { CORS } = require('./../../app.config');
+
 const corsMiddleware = (req, res, next) => {
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, Content-Type, Content-Length, Accept',
-  );
-  res.header('Access-Control-Allow-Methods', 'GET, POST');
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', CORS.HEADERS);
+  res.header('Access-Control-Allow-Methods', CORS.METHODS);
+  res.header('Access-Control-Allow-Origin', CORS.ORIGIN);
   next();
 };
 

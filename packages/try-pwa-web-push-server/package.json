@@ -4,10 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node bin/index.js"
+    "start": "node bin/index.js",
+    "deploy": "sls deploy",
+    "sls": "sls"
   },
   "dependencies": {
+    "aws-serverless-express": "^3.3.5",
     "express": "^4.16.3",
     "firebase-admin": "^6.0.0"
+  },
+  "devDependencies": {
+    "serverless": "^1.32.0"
   }
 }
