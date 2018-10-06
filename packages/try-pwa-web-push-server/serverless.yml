@@ -26,14 +26,14 @@ package:
 
 functions:
   notify:
-    handler: handler.handler
+    handler: handler.app
     timeout: 5
     memorySize: 128
     environment:
       CORS_ALLOW_ORIGIN: ${self:custom.CORS.ORIGIN}
     events:
       - http:
-          path: '/'
+          path: '{proxy+}'
           method: get
           private: true
           cors:
@@ -41,12 +41,6 @@ functions:
       - http:
           path: '{proxy+}'
           method: post
-          private: true
-          cors:
-            origin: ${self:custom.CORS.ORIGIN}
-      - http:
-          path: '{proxy+}'
-          method: get
           private: true
           cors:
             origin: ${self:custom.CORS.ORIGIN}
