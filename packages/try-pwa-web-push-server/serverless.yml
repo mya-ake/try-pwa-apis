@@ -25,7 +25,7 @@ package:
     - yarn.lock
 
 functions:
-  notify:
+  app:
     handler: handler.app
     timeout: 5
     memorySize: 128
