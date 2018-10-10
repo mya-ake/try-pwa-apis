@@ -1,6 +1,6 @@
 # 更新情報
 
-(Try PWA)[https://neko-note-help.booth.pm/items/1029866]の更新情報ページです。
+[Try PWA](https://neko-note-help.booth.pm/items/1029866)の更新情報ページです。
 
 更新の重要度は次のような感じにします。
 
