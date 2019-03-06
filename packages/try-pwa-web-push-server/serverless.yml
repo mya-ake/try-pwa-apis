@@ -1,6 +1,6 @@
 service: ${self:custom.NAME}
 
-frameworkVersion: ">=1.32.0"
+frameworkVersion: ">=1.38.0"
 
 provider:
   name: aws

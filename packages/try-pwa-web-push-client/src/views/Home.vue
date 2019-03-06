@@ -18,26 +18,26 @@
     <section>
       <h2>Actions</h2>
 
-      <div>
+      <div class="row">
         <button
-          v-if="!hasToken"
           :disabled="!webPushUsable"
           type="button"
-          @click="handleClickUse">Use web push</button>
+          @click="handleClickUse"
+        >
+          Use web push
+        </button>
       </div>
 
       <div class="row">
-        <button
-          v-if="hasToken"
-          type="button"
-          @click="handleClickSend">Send push notification</button>
+        <button v-if="hasToken" type="button" @click="handleClickSend">
+          Send push notification
+        </button>
       </div>
 
       <div>
-        <button
-          v-if="hasToken"
-          type="button"
-          @click="handleClickStop">Stop using web push</button>
+        <button v-if="hasToken" type="button" @click="handleClickStop">
+          Stop using web push
+        </button>
       </div>
 
       <p v-if="hasMessage">Message:{{ message }}</p>
@@ -73,9 +73,6 @@ export default {
   methods: {
     async initialize() {
       this.token = await this.$_storage.load("push-token");
-      if (this.hasToken === false) {
-        return;
-      }
     },
 
     async handleClickUse() {
@@ -110,6 +107,21 @@ export default {
         this.message = "プッシュ通知の送信に失敗しました";
         console.error(response);
       }
+    },
+
+    deleteToken(token) {
+      if (this.usable === false) {
+        return this.FAILED;
+      }
+      return this._messaging
+        .deleteToken(token)
+        .then(result => {
+          return result === true ? this.SUCCESS : this.FAILED;
+        })
+        .catch(err => {
+          console.error(err);
+          return this.FAILED;
+        });
     },
 
     async handleClickStop() {
