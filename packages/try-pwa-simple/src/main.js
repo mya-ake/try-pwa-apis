@@ -10,5 +10,5 @@ new Vue({
 }).$mount("#app");
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
+  navigator.serviceWorker.register("/sw.js").catch(() => {}); // 必要であればエラー時の処理も書く
 }
